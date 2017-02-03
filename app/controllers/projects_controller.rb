@@ -20,6 +20,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+    @project.user = current_user
 
     if @project.save
       redirect_to projects_path
@@ -29,17 +30,29 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    @project = Project.find(params[:id])
+    if @project.update(project_params)
+      redirect_to projects_path
+    else
+      render :edit
+    end
   end
 
   def destroy
-
+    if @project.destroy
+      redirect_to root_path, alert: "项目成功删除！"
+    else
+      redirect_to root_path, alert: "项目删除失败，请查看相关日志检查原因！"
+    end
   end
 
   private
 
   def find_project_and_check_permission
     @project = Project.find(params[:id])
+
+    if @project.user != current_user
+      redirect_to root_path, alert: "你没有权限进行此项操作！"
+    end
   end
 
   def project_params
