@@ -4,4 +4,6 @@ class Project < ApplicationRecord
 
   has_many :project_relationships
   has_many :members, through: :project_relationships, source: :user
+
+  has_many :products
 end
