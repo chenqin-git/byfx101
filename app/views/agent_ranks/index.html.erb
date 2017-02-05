@@ -1,0 +1,32 @@
+<div class="col-md-12">
+  <h2>分销商等级管理</h2>
+  <div class="group">
+    <%= link_to("新建", new_agent_rank_path, class: "btn btn-primary pull-right") %>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>名称</th>
+        <th>等级</th>
+        <th>描述</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @agent_ranks.each do |agent_rank| %>
+        <tr>
+          <td>#</td>
+          <td><%= agent_rank.name %></td>
+          <td><%= agent_rank.rank %></td>
+          <td><%= agent_rank.remark %></td>
+          <td>
+              <%= link_to("编辑", edit_agent_rank_path(agent_rank), class: "btn btn-sm btn-default")%>
+              <%= link_to("删除", agent_rank_path(agent_rank),    class: "btn btn-sm btn-default",
+                          method: :delete, data: { confirm: "Are you sure?" } )%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

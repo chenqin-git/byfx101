@@ -1,0 +1,2 @@
+class AgentRank < ApplicationRecord
+end

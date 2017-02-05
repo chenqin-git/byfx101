@@ -1,0 +1,2 @@
+module AgentRanksHelper
+end
