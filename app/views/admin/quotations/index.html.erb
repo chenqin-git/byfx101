@@ -1,0 +1,34 @@
+<div class="col-md-12">
+  <h2>价格表管理</h2>
+  <div class="group">
+    <%= link_to("新建", new_admin_quotation_path, class: "btn btn-primary pull-right") %>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>项目</th>
+        <th>产品</th>
+        <th>等级</th>
+        <th>价格</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @quotations.each do |quotation| %>
+        <tr>
+          <td>#</td>
+          <td><%= quotation.product.project.name %></td>
+          <td><%= quotation.product.name %></td>
+          <td><%= quotation.agent_rank.name %></td>
+          <td><%= quotation.price %></td>
+          <td>
+              <%= link_to("编辑", edit_admin_quotation_path(quotation), class: "btn btn-sm btn-default")%>
+              <%= link_to("删除", admin_quotation_path(quotation),    class: "btn btn-sm btn-default",
+                          method: :delete, data: { confirm: "Are you sure?" } )%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,8 @@
+<%= simple_form_for [:admin, @quotation] do |f| %>
+  <div class="form-group">
+    <%= f.input :price, input_html: { class: "form-control"} %>
+    <p><%= "动态选择产品" %></p>
+    <p><%= "动态选择分销商等级" %></p>
+  </div>
+  <%= f.submit "提交", class: "btn btn-primary", data: { disable_with: "提交中..." } %>
+<% end %>

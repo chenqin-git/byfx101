@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :admin do
+    resources :users
     resources :orders
     resources :quotations
     resources :agent_ranks

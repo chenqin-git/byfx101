@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class QuotationsControllerTest < ActionDispatch::IntegrationTest
+class Admin::AgentRanksControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
