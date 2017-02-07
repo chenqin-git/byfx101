@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170204102620) do
+ActiveRecord::Schema.define(version: 20170205005742) do
 
   create_table "agent_ranks", force: :cascade do |t|
     t.string   "name"
     t.integer  "rank"
     t.string   "remark"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "num"
+    t.string   "input"
+    t.integer  "user_id"
+    t.integer  "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -41,6 +50,14 @@ ActiveRecord::Schema.define(version: 20170204102620) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
+  end
+
+  create_table "quotations", force: :cascade do |t|
+    t.integer  "price"
+    t.integer  "product_id"
+    t.integer  "agent_rank_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "users", force: :cascade do |t|

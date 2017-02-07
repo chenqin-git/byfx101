@@ -7,11 +7,6 @@
         <label class="label label-warning">非项目成员</label>
       <% end %>
     </span>
-
-    <% if current_user && current_user == @project.user %>
-      <%= link_to("添加产品", new_project_product_path(@project), class: "btn btn-default pull-right") %>
-      <%= link_to("编辑项目", edit_project_path(@project), class: "btn btn-primary pull-right") %>
-    <% end %>
   </div>
   <h2><%= @project.name %></h2>
   <p><%= @project.remark %></p>
@@ -32,12 +27,7 @@
         <td><%= product.remark %></td>
         <td><%= product.updated_at %></td>
         <td>
-          <% if current_user && current_user == @project.user %>
-            <%= link_to("编辑", edit_project_product_path(@project,product), class: "btn btn-sm btn-default") %>
-            <%= link_to("删除", project_product_path(@project,product), class: "btn btn-sm btn-default", method: :delete, data: { confirm: "Are you sure?" }) %>
-          <% end %>
-
-          <%= link_to("购买", edit_project_product_path(@project,product), class: "btn btn-sm btn-primary") %>
+          <%= link_to("购买", new_product_order_path(product), class: "btn btn-sm btn-primary") %>
         </td>
       </tr>
     <% end %>

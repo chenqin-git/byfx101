@@ -2,15 +2,7 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">分销系统</a>
-        </div>
-
-        <div class="navbar-header">
-          <%= link_to("项目管理", projects_path, class: "navbar-brand") %>
-        </div>
-
-        <div class="navbar-header">
-          <%= link_to("分销等级", agent_ranks_path, class: "navbar-brand") %>
+            <a class="navbar-brand" href="/">分销系统 - BYFX101</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -27,15 +19,20 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                         <li> <%= link_to("参与项目", projects_path) %></li>
+                          <li><%= link_to("参与项目", projects_path) %></li>
 
-                         <li class="divider"> </li>
-                         <li> <%= link_to("登出", destroy_user_session_path, method: :delete) %> </li>
-                      </ul>
+                          <li class="divider"> </li>
+                          <li><%= link_to("项目管理", admin_projects_path) %></li>
+                          <li><%= link_to("订单管理", admin_orders_path) %></li>
+                          <li><%= link_to("分销商等级管理", admin_agent_ranks_path) %></li>
+                          <li><%= link_to("价格表管理", admin_quotations_path) %></li>
+
+                          <li class="divider"> </li>
+                          <li> <%= link_to("登出", destroy_user_session_path, method: :delete) %> </li>
+                        </ul>
 
                       </li>
                     <% end %>
-
                 </li>
             </ul>
         </div>

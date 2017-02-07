@@ -1,0 +1,36 @@
+<div class="col-md-12">
+  <div class="group">
+    <% if current_user && current_user == @project.user %>
+      <%= link_to("添加产品", new_admin_project_product_path(@project), class: "btn btn-default pull-right") %>
+      <%= link_to("编辑项目", edit_admin_project_path(@project), class: "btn btn-primary pull-right") %>
+    <% end %>
+  </div>
+  <h2><%= @project.name %></h2>
+  <p><%= @project.remark %></p>
+
+  <table class="table">
+  <thead>
+    <tr>
+      <th>产品名称</th>
+      <th>描述</th>
+      <th>更新时间</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.remark %></td>
+        <td><%= product.updated_at %></td>
+        <td>
+          <% if current_user && current_user == @project.user %>
+            <%= link_to("编辑", edit_admin_product_path(product), class: "btn btn-sm btn-default") %>
+            <%= link_to("删除", admin_product_path(product), class: "btn btn-sm btn-default", method: :delete, data: { confirm: "Are you sure?" }) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
