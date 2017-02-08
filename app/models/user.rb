@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :projects
   has_many :orders
 
+  belongs_to :agent_rank
+
   has_many :project_relationships
   has_many :joined_projects, :through => :project_relationships, :source => :project
 

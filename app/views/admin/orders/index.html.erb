@@ -23,10 +23,10 @@
           <td>#</td>
           <td><%= link_to(order.id, account_order_path(order)) %></td>
           <td><%= order.product.name %></td>
-          <td><%= "计算字段" %></td>
+          <td><%= order.product.calculate_agent_price!(order.user) %></td>
           <td><%= order.num %></td>
           <td><%= order.input %></td>
-          <td><%= "计算字段" %></td>
+          <td><%= order.calculate_amount! %></td>
           <td><%= order.user.email %></td>
           <td>
             <%= link_to("编辑", edit_admin_order_path(order), class: "btn btn-sm btn-default")%>

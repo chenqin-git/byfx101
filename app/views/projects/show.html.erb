@@ -16,16 +16,18 @@
     <tr>
       <th>产品名称</th>
       <th>描述</th>
-      <th>更新时间</th>
-      <th>操作</th>
+      <th>价格</th>
+      <th>买卖</th>
     </tr>
   </thead>
   <tbody>
-    <% @products.each do |product| %>
+    <% @project.products.each do |product| %>
       <tr>
         <td><%= product.name %></td>
         <td><%= product.remark %></td>
-        <td><%= product.updated_at %></td>
+        <td>
+            <%= product.calculate_agent_price!(current_user)  %>
+        </td>
         <td>
           <%= link_to("购买", new_product_order_path(product), class: "btn btn-sm btn-primary") %>
         </td>

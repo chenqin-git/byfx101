@@ -7,6 +7,5 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
-    @products = @project.products
   end
 end

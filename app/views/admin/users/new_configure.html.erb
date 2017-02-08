@@ -1,0 +1,12 @@
+<div class="col-md-4 col-md-offset-4">
+    <h2>配置用户</h2>
+    <hr>
+    <%= simple_form_for [:admin, @user], method: :post, url: configure_admin_user_path(@user) do |f| %>
+      <div class="form-group">
+        <p><%= @user.email %></p>
+        <%= f.association :agent_rank, collection: @agent_ranks, priority: 1, input_html: { class: "form-control"} %>
+        <%= f.association :joined_projects, as: :check_boxes, collection: @projects, priority: 1, input_html: { } %>
+      </div>
+      <%= f.submit "提交", class: "btn btn-primary", data: { disable_with: "提交中..." } %>
+    <% end %>
+</div>

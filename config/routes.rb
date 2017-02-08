@@ -2,7 +2,12 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :admin do
-    resources :users
+    resources :users do
+      member do
+        get :new_configure
+        post :configure
+      end
+    end
     resources :orders
     resources :quotations
     resources :agent_ranks

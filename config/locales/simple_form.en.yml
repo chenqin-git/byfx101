@@ -14,6 +14,8 @@ en:
       defaults:
         name: '名称'
         remark: '描述'
+        num: '数量'
+        input: '输入参数'
     # Examples
     # labels:
     #   defaults:
