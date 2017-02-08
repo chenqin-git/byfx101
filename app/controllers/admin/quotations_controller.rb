@@ -1,6 +1,6 @@
 class Admin::QuotationsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-  #before_action :check_permission, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  before_action :check_permission!, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
   def index
     @quotations = Quotation.all

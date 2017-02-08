@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   def index
-    
+
   end
 
   def show
@@ -18,6 +18,11 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.product = @product
     @order.user = current_user
+
+    if @product.calculate_agent_price!(current_user) <= 0
+      redirect_to project_path(@product.project), notice: "你的等级无权购买此商品"
+      return
+    end
 
     if @order.save
       redirect_to project_path(@product.project)

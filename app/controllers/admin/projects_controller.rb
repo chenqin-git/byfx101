@@ -1,6 +1,7 @@
 class Admin::ProjectsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   before_action :find_project_and_check_permission, only: [:edit, :update, :destroy]
+  before_action :check_permission!, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
   def index
     @projects = Project.all

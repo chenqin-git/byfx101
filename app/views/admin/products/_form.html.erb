@@ -2,6 +2,7 @@
   <%= simple_form_for [:admin, @project,@product] do |f| %>
     <div class="form-group">
       <%= f.input :name, input_html: { class: "form-control"} %>
+      <%= f.input :input_name, input_html: { class: "form-control"} %>
       <%= f.input :remark, input_html: { class: "form-control"} %>
     </div>
     <div class="form-actions">

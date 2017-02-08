@@ -1,5 +1,6 @@
 class Admin::ProductsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
+  before_action :check_permission!, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
   def new
     @project = Project.find(params[:project_id])
@@ -41,6 +42,6 @@ class Admin::ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :remark)
+    params.require(:product).permit(:name, :input_name, :remark)
   end
 end

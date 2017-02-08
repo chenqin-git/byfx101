@@ -4,7 +4,7 @@
   <%= simple_form_for [@product, @order] do |f| %>
     <div class="form-group">
       <%= f.input :num, input_html: { class: "form-control"} %>
-      <%= f.label @product.remark %>
+      <p><%= f.label @product.input_name %></p>
       <%= f.text_field :input, input_html: { class: "form-control"} %>
       <p><%= simple_format(@product.remark) %></p>
     </div>

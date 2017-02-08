@@ -1,6 +1,6 @@
 class Admin::AgentRanksController < ApplicationController
   before_action :authenticate_user!, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-  before_action :check_permission, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  before_action :check_permission!, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
   def index
     @agent_ranks = AgentRank.all
@@ -48,7 +48,4 @@ class Admin::AgentRanksController < ApplicationController
     params.require(:agent_rank).permit(:name, :rank, :remark)
   end
 
-  def check_permission
-
-  end
 end

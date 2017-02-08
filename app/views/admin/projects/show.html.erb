@@ -12,6 +12,7 @@
   <thead>
     <tr>
       <th>产品名称</th>
+      <th>参数名称</th>
       <th>描述</th>
       <th>更新时间</th>
       <th>操作</th>
@@ -21,6 +22,7 @@
     <% @products.each do |product| %>
       <tr>
         <td><%= product.name %></td>
+        <td><%= product.input_name %></td>
         <td><%= product.remark %></td>
         <td><%= product.updated_at %></td>
         <td>

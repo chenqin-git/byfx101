@@ -2,7 +2,7 @@ class Account::OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    @orders = current_user.orders
+    @orders = current_user.orders.recent.paginate(:page => params[:page], :per_page => 10)
   end
 
   def show
