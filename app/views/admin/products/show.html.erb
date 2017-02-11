@@ -1,1 +1,44 @@
-<center>coming soon...</center>
+<h2 class="text-center"><%= @product.name %></h2>
+<h3>描述</h3>
+<p><%= @product.remark %></p>
+
+<h3>价格表</h3>
+<table class="table">
+<thead>
+  <tr>
+    <th>等级</th>
+    <th>价格</th>
+    <th>创建时间</th>
+    <th>更新时间</th>
+    <th>操作</th>
+  </tr>
+</thead>
+<tbody>
+  <% @product.quotations.each do |quotation| %>
+    <tr>
+      <td><%= quotation.agent_rank.name %></td>
+      <td><%= quotation.price %></td>
+      <td><%= quotation.created_at %></td>
+      <td><%= quotation.updated_at %></td>
+      <td>
+        <%= link_to("编辑", edit_admin_quotation_path(quotation), class: "btn btn-sm btn-default") %>
+        <%= link_to("删除", admin_quotation_path(quotation), class: "btn btn-sm btn-default", method: :delete, data: { confirm: "Are you sure?" }) %>
+      </td>
+    </tr>
+  <% end %>
+</tbody>
+</table>
+<hr>
+<h3>添加新报价</h3>
+<div class="col-md-4 col-md-offset-4">
+  <%= simple_form_for @new_product_quotation, url: admin_product_quotations_path(@product) do |f| %>
+    <div class="form-group">
+      <p><%= f.input :price, as: :integer, class: "form-control" %></p>
+      <p><%= f.association :product, input_html: { class: "form-control"} %></p>
+      <p><%= f.association :agent_rank, collection: AgentRank.all, priority: 1, class: "form-control" %></p>
+    </div>
+    <div class="form-actions">
+      <%= f.submit "提交", disable_with: "提交中...", class: "btn btn-primary"%>
+    </div>
+  <% end %>
+</div>

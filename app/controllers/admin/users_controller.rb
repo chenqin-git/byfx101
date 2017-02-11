@@ -8,21 +8,23 @@ class Admin::UsersController < ApplicationController
 
   def new_configure
     @user = User.find(params[:id])
-    @agent_ranks = AgentRank.all
-    @projects = Project.all
   end
 
   def configure
     @user = User.find(params[:id])
-    @fu = user_config_params
 
-    if @user.update(user_config_params)
-      @user.joined_projects << Project.find(params[:user]["joined_project_ids"][1])
-      if @user.save
-        redirect_to admin_users_path, notice: "配置成功！"
-      else
-        render :new_configure
+    @user.agent_rank_id = params[:user]["agent_rank_id"].to_i
+    @user.joined_projects = []
+
+    @jpids = params[:user]["joined_project_ids"]
+    @jpids.each do |ids|
+      if ids && ids != ""
+        @user.joined_projects << Project.find(ids.to_i)
       end
+    end
+
+    if @user.save
+      redirect_to admin_users_path, notice: "配置成功！"
     else
       render :new_configure
     end

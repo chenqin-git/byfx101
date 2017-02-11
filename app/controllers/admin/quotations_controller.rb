@@ -9,8 +9,10 @@ class Admin::QuotationsController < ApplicationController
 
   def new
     @quotation = Quotation.new
-    @products = Product.all
-    @agent_ranks = AgentRank.all
+
+    if params[:product_id] #当在产品信息中设置价格表则产品参数存在
+      @quotation.product = Product.find(params[:product_id])
+    end
   end
 
   def create

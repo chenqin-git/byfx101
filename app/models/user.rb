@@ -12,6 +12,9 @@ class User < ApplicationRecord
   has_many :project_relationships
   has_many :joined_projects, :through => :project_relationships, :source => :project
 
+  accepts_nested_attributes_for :agent_rank, :reject_if => :all_blank
+  accepts_nested_attributes_for :joined_projects, :reject_if => :any_blank
+
   def is_member_of?(project)
     joined_projects.include?(project)
   end

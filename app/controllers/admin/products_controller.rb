@@ -2,6 +2,13 @@ class Admin::ProductsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   before_action :check_permission!, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
+  def show
+    @product = Product.find(params[:id])
+
+    @new_product_quotation = Quotation.new
+    @new_product_quotation.product = @product
+  end
+
   def new
     @project = Project.find(params[:project_id])
     @product = Product.new

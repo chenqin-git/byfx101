@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     resources :agent_ranks
 
     resources :projects do
-      resources :products, shallow: true
+      resources :products, shallow: true do
+        resources :quotations, only: [:new, :create,]
+      end
     end
   end
 
@@ -36,5 +38,6 @@ Rails.application.routes.draw do
 #  end
 
   root 'projects#index'
+  resource :welcome, controller: :welcome
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
