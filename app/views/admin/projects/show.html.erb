@@ -14,6 +14,7 @@
       <th>产品名称</th>
       <th>参数名称</th>
       <th>描述</th>
+      <th colspan="2">价格表</th>
       <th>更新时间</th>
       <th>操作</th>
     </tr>
@@ -24,10 +25,15 @@
         <td><%= link_to(product.name, admin_product_path(product)) %></td>
         <td><%= product.input_name %></td>
         <td><%= product.remark %></td>
+        <td><%= display_product_quotation(product) %></td>
+        <td><%= link_to("设置", admin_product_path(product), class: "btn btn-primary pull-right" ) %></td>
         <td><%= product.updated_at %></td>
         <td>
-          <%= link_to("价格表", admin_product_path(product), class: "btn btn-primary pull-right" ) %>
+
           <% if current_user && current_user == @project.user %>
+            <% product.errors.each do |e| %>
+              <%= e %>
+            <% end %>
             <%= link_to("编辑", edit_admin_product_path(product), class: "btn btn-sm btn-default") %>
             <%= link_to("删除", admin_product_path(product), class: "btn btn-sm btn-default", method: :delete, data: { confirm: "Are you sure?" }) %>
           <% end %>

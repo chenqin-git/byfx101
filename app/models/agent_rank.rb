@@ -1,4 +1,4 @@
 class AgentRank < ApplicationRecord
-  has_many :quotations
-  has_many :users
+  has_many :quotations, dependent: :delete_all
+  has_many :users, dependent: :nullify
 end

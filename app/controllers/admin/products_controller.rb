@@ -43,6 +43,15 @@ class Admin::ProductsController < ApplicationController
   def destroy
     @product = Product.find(params[:id])
     @product.destroy
+
+    if @product.errors && @product.errors.size > 0
+      @err_str = ""
+      @product.errors.messages[:base].each do |m|
+        @err_str += "#{m} "
+      end
+      flash[:alert] = @err_str
+    end
+
     redirect_to admin_project_path(@product.project)
   end
 
