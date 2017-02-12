@@ -40,6 +40,10 @@ Rails.application.routes.draw do
   get '/products/:product_id/orders/new', to: 'orders#new', as: 'new_product_order'
   post '/products/:product_id/orders', to: 'orders#create', as: 'product_orders'
 
+  namespace :robots do
+    resources :orders
+  end
+
 #  resources :projects, only: [:index, :show] do
 #    resources :products, only: [:index, :show]
 #  end

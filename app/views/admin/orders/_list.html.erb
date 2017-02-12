@@ -33,7 +33,7 @@
         <td><%= order.calculate_amount! %></td>
         <td><%= order.user.email %></td>
         <td><%= order.status %></td>
-        <td><%= show_result(order) %></td>
+        <td><%= order.show_result %></td>
         <td>
           <%= link_to("设置", set_result_admin_order_path(order), class: "btn btn-sm btn-default")%>
           <%= link_to("编辑", edit_admin_order_path(order), class: "btn btn-sm btn-default")%>

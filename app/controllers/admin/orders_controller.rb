@@ -28,6 +28,9 @@ class Admin::OrdersController < ApplicationController
 
     if !@order.order_result
       @order_result = OrderResult.new
+      @order_result.operator = current_user.email
+      @order_result.success_num = @order.num
+      @order_result.message = "管理后台手动设置"
     else
       @order_result = @order.order_result
     end
@@ -57,6 +60,6 @@ class Admin::OrdersController < ApplicationController
   private
 
   def order_result_params
-    params.require(:order_result).permit(:result, :success, :message, :operator)
+    params.require(:order_result).permit(:result, :success_num, :message, :operator)
   end
 end

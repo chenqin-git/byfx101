@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170211133020) do
+ActiveRecord::Schema.define(version: 20170212074758) do
 
   create_table "agent_ranks", force: :cascade do |t|
     t.string   "name"
@@ -23,11 +23,11 @@ ActiveRecord::Schema.define(version: 20170211133020) do
   create_table "order_results", force: :cascade do |t|
     t.string   "result"
     t.string   "message"
-    t.boolean  "success"
     t.string   "operator"
     t.integer  "order_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "success_num"
     t.index ["order_id"], name: "index_order_results_on_order_id"
   end
 

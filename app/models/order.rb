@@ -11,7 +11,7 @@ class Order < ApplicationRecord
   def calculate_amount!
     @price = product.calculate_agent_price!(user)
 
-    if !@price || @price == -1
+    if !@price || @price  == -1
       return -1
     elsif !num
       return 0
@@ -23,11 +23,7 @@ class Order < ApplicationRecord
   def status
     case state
     when 0
-      if order_result
-        return order_result.success ? "成交" : "失败"
-      else
-        return "正常"
-      end
+      order_result ? "已处理" : "等待处理"
     when 1
       return "取消"
     else
