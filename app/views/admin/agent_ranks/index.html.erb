@@ -10,6 +10,7 @@
         <th>名称</th>
         <th>等级</th>
         <th>描述</th>
+        <th>用户数量</th>
         <th>操作</th>
       </tr>
     </thead>
@@ -20,6 +21,7 @@
           <td><%= agent_rank.name %></td>
           <td><%= agent_rank.rank %></td>
           <td><%= agent_rank.remark %></td>
+          <td><%= agent_rank.users.size %></td>
           <td>
               <%= link_to("编辑", edit_admin_agent_rank_path(agent_rank), class: "btn btn-sm btn-default")%>
               <%= link_to("删除", admin_agent_rank_path(agent_rank),    class: "btn btn-sm btn-default",

@@ -1,0 +1,44 @@
+<h2 class="text-center">设置订单结果</h2>
+<hr>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>编号</th>
+      <th>产品</th>
+      <th>单价</th>
+      <th>数量</th>
+      <th>参数</th>
+      <th>总价</th>
+      <th>分销商</th>
+      <th>状态</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>#</td>
+      <td><%= @order.id %></td>
+      <td><%= @order.product.name %></td>
+      <td><%= @order.product.calculate_agent_price!(@order.user) %></td>
+      <td><%= @order.num %></td>
+      <td><%= @order.input %></td>
+      <td><%= @order.calculate_amount! %></td>
+      <td><%= @order.user.email %></td>
+      <td><%= @order_status %></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="col-md-4 col-md-offset-4">
+  <%= simple_form_for @order_result, url: save_result_admin_order_path(@order), method: :post do |f| %>
+    <div class="form-group">
+      <%= f.input :result, input_html: { class: "form-control"} %>
+      <%= f.input :success, as: :boolean %>
+      <%= f.input :message, input_html: { class: "form-control"} %>
+      <%= f.input :operator, input_html: { class: "form-control"} %>
+    </div>
+    <div class="form-actions">
+      <%= f.submit "保存", disable_with: "保存中...", class: "btn btn-primary"%>
+    </div>
+  <% end %>
+</div>

@@ -10,6 +10,7 @@
         <th>名称</th>
         <th>登录次数</th>
         <th>创建时间</th>
+        <th>等级</th>
       </tr>
     </thead>
     <tbody>
@@ -19,6 +20,7 @@
           <td><%= link_to(user.email, admin_user_path(user)) %></td>
           <td><%= user.sign_in_count %></td>
           <td><%= user.created_at %></td>
+          <td><%= user.agent_rank ? user.agent_rank.name : "未设置" %></td>
           <td>
             <%= link_to("配置", new_configure_admin_user_path(user), class: "btn btn-sm btn-default")%>
             <%= link_to("编辑", edit_admin_user_path(user), class: "btn btn-sm btn-default")%>

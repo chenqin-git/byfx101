@@ -13,6 +13,8 @@
         <th>数量</th>
         <th>参数</th>
         <th>总价</th>
+        <th>状态</th>
+        <th>结果</th>
       </tr>
     </thead>
     <tbody>
@@ -25,6 +27,8 @@
           <td><%= order.num %></td>
           <td><%= order.input %></td>
           <td><%= order.calculate_amount! %></td>
+          <td><%= order.status %></td>
+          <td><%= order.show_result %></td>
         </tr>
       <% end %>
     </tbody>

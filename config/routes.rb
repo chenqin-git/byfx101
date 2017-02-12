@@ -8,7 +8,18 @@ Rails.application.routes.draw do
         post :configure
       end
     end
-    resources :orders
+
+    resources :orders do
+      member do
+        get :set_result
+        post :save_result
+      end
+
+      collection do
+        get :search
+      end
+    end
+
     resources :quotations
     resources :agent_ranks
 

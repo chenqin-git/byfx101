@@ -1,0 +1,50 @@
+<div class="group">
+  <%= form_tag("/admin/orders/search", method: "get") do %>
+    <%= label_tag(:product_id, "产品：") %>
+    <%= select_tag(:product_id, options_from_collection_for_select(Product.all, :id, :name, params[:product_id])) %>
+    <%= submit_tag(:search) %>
+  <% end %>
+</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>编号</th>
+      <th>产品</th>
+      <th>单价</th>
+      <th>数量</th>
+      <th>参数</th>
+      <th>总价</th>
+      <th>分销商</th>
+      <th>状态</th>
+      <th>结果</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td>#</td>
+        <td><%= order.id %></td>
+        <td><%= order.product.name %></td>
+        <td><%= order.product.calculate_agent_price!(order.user) %></td>
+        <td><%= order.num %></td>
+        <td><%= order.input %></td>
+        <td><%= order.calculate_amount! %></td>
+        <td><%= order.user.email %></td>
+        <td><%= order.status %></td>
+        <td><%= show_result(order) %></td>
+        <td>
+          <%= link_to("设置", set_result_admin_order_path(order), class: "btn btn-sm btn-default")%>
+          <%= link_to("编辑", edit_admin_order_path(order), class: "btn btn-sm btn-default")%>
+          <%= link_to("删除", admin_order_path(order),    class: "btn btn-sm btn-default",
+                      method: :delete, data: { confirm: "Are you sure?" } )%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="text-center">
+  <%= will_paginate @orders %>
+</div>
