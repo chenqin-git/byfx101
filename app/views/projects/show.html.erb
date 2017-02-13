@@ -1,8 +1,8 @@
 <div class="col-md-12">
   <div class="group">
     <span class="pull-right">
-      <% if current_user && current_user.is_member_of?(@project) %>
-        <label class="label label-success">项目成员</label>
+      <% if current_user && current_user.is_member_of?(@project) && current_user.agent_rank %>
+        <label class="label label-success"><%= current_user.agent_rank.name %></label>
       <% else %>
         <label class="label label-warning">非项目成员</label>
       <% end %>

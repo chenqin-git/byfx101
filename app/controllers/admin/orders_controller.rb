@@ -38,22 +38,19 @@ class Admin::OrdersController < ApplicationController
 
   def save_result
     @order = Order.find(params[:id])
-
-    if @order.order_result
-      if @order.order_result.update(order_result_params)
-        redirect_to admin_orders_path
-      else
-        render :set_result
-      end
+    if !@order.order_result
+      @order.build_order_result(order_result_params)
     else
-      @order_result = OrderResult.new(order_result_params)
-      @order_result.order = @order
+      @order.order_result.result = order_result_params[:result]
+      @order.order_result.success_num = order_result_params[:success_num]
+      @order.order_result.message = order_result_params[:message]
+      @order.order_result.operator = order_result_params[:operator]
+    end
 
-      if @order_result.save
-        redirect_to admin_orders_path, notice: "创建订单结果成功"
-      else
-        render :fill_result
-      end
+    if @order.save
+      redirect_to admin_orders_path, notice: "保存订单结果成功"
+    else
+      render :set_result
     end
   end
 

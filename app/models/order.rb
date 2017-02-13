@@ -4,7 +4,7 @@ class Order < ApplicationRecord
   belongs_to :product
   belongs_to :user
   has_one :order_result
-  accepts_nested_attributes_for :order_result, :reject_if => :all_blank
+  accepts_nested_attributes_for :order_result
 
   scope :recent, -> { order("created_at DESC") }
 
@@ -23,7 +23,23 @@ class Order < ApplicationRecord
   def status
     case state
     when 0
-      order_result ? "已处理" : "等待处理"
+      if order_result
+        if !order_result.success_num
+          order_result.success_num = -1
+        end
+
+        if order_result.success_num  < 0
+          return "等待处理"
+        elsif order_result.success_num == 0
+          return "全部失败"
+        elsif order_result.success_num < num
+          return "部分成功"
+        else
+          return "全部成功"
+        end
+      else
+        return "无效数据"
+      end
     when 1
       return "取消"
     else

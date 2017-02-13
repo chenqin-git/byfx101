@@ -3,17 +3,14 @@ class OrderResult < ApplicationRecord
 
   def info
     if !success_num
-      self.success_num = 0
+      self.success_num = -1
     end
 
-    if success_num == 0
-      @str = "失败"
-    elsif order
-      @str = (success_num < order.num) ? "部分成功" : "成功"
+    if success_num < 0
+      return "队列中"
     else
-      @str = "未知错误"
+      @finish_rate = success_num * 100 / order.num
+      return "[ #{operator} ][ #{@finish_rate}% ]：#{success_num} / #{order.num} | #{result} - #{message}"
     end
-
-    "[#{operator}]：[#{result}]\t#{@str} - #{message}"
   end
 end
