@@ -50,6 +50,12 @@ Rails.application.routes.draw do
         get :done
       end
     end
+
+    resources :stocks, only: [] do
+      collection do
+        get :synchronize
+      end
+    end
   end
 
 #  resources :projects, only: [:index, :show] do

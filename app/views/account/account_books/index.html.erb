@@ -27,7 +27,7 @@
             <% if account_book.transaction_type == 1 %>
               <%= account_book.deposit_reference_no %>
             <% elsif [2,3].include?(account_book.transaction_type)  %>
-              <%= link_to("订单 #{account_book.order_id}", admin_orders_path) %>
+              <%= link_to("订单 #{account_book.order_id}", account_order_path(Order.find(account_book.order_id))) %>
             <% else %>
               未知交易
             <% end %>

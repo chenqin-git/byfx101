@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
   before_action :check_permission!, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
   def index
-    @users = User.all
+    @users = User.all.paginate(:page => params[:page], :per_page => 20)
   end
 
   def new_configure

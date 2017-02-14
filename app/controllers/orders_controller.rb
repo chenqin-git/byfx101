@@ -28,6 +28,12 @@ class OrdersController < ApplicationController
       return
     end
 
+    @stock_num = @product.stock_num!
+    if @order.num > @stock_num
+      redirect_to project_path(@product.project), alert: "当前库存（#{@stock_num}）不足，无法购买 #{@order.num} 个，请刷新库存重试"
+      return
+    end
+
     @order_amount = @order.calculate_amount!
     @balance = current_user.balance!
     if @order_amount > @balance
@@ -36,7 +42,7 @@ class OrdersController < ApplicationController
     end
 
     if @order.save
-
+      # 更新账本记录
       @account_book = AccountBook.new
       @account_book.user = current_user
       @account_book.order_id = @order.id
@@ -46,6 +52,12 @@ class OrdersController < ApplicationController
       @account_book.operator = current_user.email
       @account_book.remark = "购买 #{@product.name} * #{@order.num}"
       @account_book.save
+
+      # 更新缓存库存记录
+      if @product.stock
+        @product.stock.num -= @order.num
+        @product.stock.save
+      end
 
       redirect_to project_path(@product.project)
     else

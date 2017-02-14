@@ -18,6 +18,16 @@ class Admin::QuotationsController < ApplicationController
   def create
     @quotation = Quotation.new(quotation_params)
 
+    # 校验是否存在相同记录
+    @sames = Quotation.where("product_id = ? and agent_rank_id = ?",
+      quotation_params[:product_id],
+      quotation_params[:agent_rank_id])
+
+    if @sames && @sames.size > 0
+      flash[:alert] = "已经存在相同记录，产品和用户等级是唯一对应的，请修改后重试"
+      render :new and return
+    end
+
     if @quotation.save
       redirect_to admin_quotations_path, notice: "创建成功！"
     else
@@ -31,6 +41,17 @@ class Admin::QuotationsController < ApplicationController
 
   def update
     @quotation = Quotation.find(params[:id])
+
+    # 校验是否存在相同记录
+    @sames = Quotation.where("product_id = ? and agent_rank_id = ? and id <> ?",
+      quotation_params[:product_id],
+      quotation_params[:agent_rank_id],
+      params[:id])
+
+    if @sames && @sames.size > 0
+      flash[:alert] = "已经存在相同记录，产品和用户等级是唯一对应的，请修改后重试"
+      render :edit and return
+    end
 
     if @quotation.update(quotation_params)
       redirect_to admin_quotations_path, notice: "更新成功！"
@@ -50,5 +71,10 @@ class Admin::QuotationsController < ApplicationController
 
   def quotation_params
     params.require(:quotation).permit(:price, :product_id, :agent_rank_id)
+  end
+
+  def check_exists
+    @quotations = Quotation.where(product_id: params[:product_id], agent_rank_id: params[:agent_rank_id])
+    return @quotations && @quotations.size > 0
   end
 end

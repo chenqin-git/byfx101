@@ -8,10 +8,10 @@ class Account::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
 
-    if !@order
-      redirect_to root_path, alert: "订单不存在"
-    elsif !current_user.orders.include?(@order)
-      redirect_to root_path, alert: "你无权查看不属于自己的订单"
+    if !current_user.orders.include?(@order)
+      redirect_to root_path, alert: "你无权查看不属于自己的订单" and return
     end
+
+    @account_books = AccountBook.where(order_id: @order.id)
   end
 end

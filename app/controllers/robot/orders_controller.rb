@@ -48,7 +48,7 @@ class Robot::OrdersController < ApplicationController
             @account_book.transaction_type = 3
             @account_book.order_id = @order.id
             @account_book.operator = params[:operator]
-            @account_book.remark = "订购 #{@order.product.name} #{@order.num} 个，成功 #{params[:success_num]} 个"
+            @account_book.remark = "订购 #{@order.product.name} * #{@order.num}，成功 #{params[:success_num]} 个"
             @account_book.balance = @account_book.calculate_balance!
             @account_book.save
           end

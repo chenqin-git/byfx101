@@ -17,6 +17,7 @@
       <th>产品名称</th>
       <th>描述</th>
       <th>价格</th>
+      <th>库存</th>
       <th>买卖</th>
     </tr>
   </thead>
@@ -25,9 +26,8 @@
       <tr>
         <td><%= product.name %></td>
         <td><%= product.remark %></td>
-        <td>
-            <%= product.calculate_agent_price!(current_user)  %>
-        </td>
+        <td><%= product.calculate_agent_price!(current_user)  %></td>
+        <td><%= product.stock_num! %></td>
         <td>
           <%= link_to("购买", new_product_order_path(product), class: "btn btn-sm btn-primary") %>
         </td>
