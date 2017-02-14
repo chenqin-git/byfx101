@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :projects
   has_many :orders
+  has_many :account_books
 
   belongs_to :agent_rank
 
@@ -25,5 +26,9 @@ class User < ApplicationRecord
 
   def quit!(project)
     joined_projects.delete(project)
+  end
+
+  def balance!
+    account_books && account_books.last && account_books.last.balance ? account_books.last.balance : 0
   end
 end

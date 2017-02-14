@@ -20,6 +20,24 @@ class Order < ApplicationRecord
     end
   end
 
+  def calculate_refund!
+    if !order_result || !order_result.success_num
+      return 0
+    end
+
+    @price = product.calculate_agent_price!(user)
+    if !@price || @price <= 0
+      return 0
+    end
+
+    @refund = (num - order_result.success_num) * @price
+    if @refund > calculate_amount!
+      return 0
+    end
+
+    return @refund
+  end
+
   def status
     case state
     when 0

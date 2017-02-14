@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       member do
         get :new_configure
         post :configure
+        get :new_deposit
+        post :deposit
       end
     end
 
@@ -32,6 +34,7 @@ Rails.application.routes.draw do
 
   namespace :account do
     resources :orders, only: [:index, :show]
+    resources :account_books, only: [:index]
   end
 
   get '/projects', to: 'projects#index', as: 'projects'

@@ -38,6 +38,20 @@ class Robot::OrdersController < ApplicationController
         if @order.order_result.update(params.permit(:success_num, :result, :message, :operator))
           @response[:success] = true
           @response[:message] = "ok"
+
+          # 退款逻辑
+          @refund = @order.calculate_refund!
+          if @refund != 0
+            @account_book = AccountBook.new
+            @account_book.user = @order.user
+            @account_book.amount = @refund
+            @account_book.transaction_type = 3
+            @account_book.order_id = @order.id
+            @account_book.operator = params[:operator]
+            @account_book.remark = "订购 #{@order.product.name} #{@order.num} 个，成功 #{params[:success_num]} 个"
+            @account_book.balance = @account_book.calculate_balance!
+            @account_book.save
+          end
         else
           @response[:message] = "保存 id=#{params[:id]} 的订单的操作结果失败"
         end
