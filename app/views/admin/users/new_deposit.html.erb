@@ -1,5 +1,17 @@
-<h2>充值金额</h2>
+<h2>用户充值</h2>
 <hr>
+
+<div class="col-md-4 col-md-offset-4">
+    <%= simple_form_for @account_book, method: :post, url: deposit_admin_user_path(@user) do |f| %>
+      <div class="form-group">
+        <%= f.input :amount, as: :decimal, class: "form-control" %>
+        <%= f.input :deposit_reference_no, class: "form-control" %>
+        <%= f.input :remark, class: "form-control" %>
+      </div>
+      <%= f.submit "提交", class: "btn btn-primary", data: { disable_with: "提交中..." } %>
+    <% end %>
+</div>
+<p>&nbsp;</p>
 
 <table class="table table-hover">
   <thead>
@@ -38,17 +50,6 @@
   </tbody>
 </table>
 
-<div class="col-md-4 col-md-offset-4">
-    <div class="text-center">
-      <%= will_paginate @account_books %>
-    </div>
-
-    <%= simple_form_for @account_book, method: :post, url: deposit_admin_user_path(@user) do |f| %>
-      <div class="form-group">
-        <%= f.input :amount, as: :decimal, class: "form-control" %>
-        <%= f.input :deposit_reference_no, class: "form-control" %>
-        <%= f.input :remark, class: "form-control" %>
-      </div>
-      <%= f.submit "提交", class: "btn btn-primary", data: { disable_with: "提交中..." } %>
-    <% end %>
+<div class="text-center">
+  <%= will_paginate @account_books %>
 </div>

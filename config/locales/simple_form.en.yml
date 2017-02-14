@@ -17,6 +17,13 @@ en:
         num: '数量'
         input: '输入参数'
         input_name: '参数名称'
+        amount: '金额'
+        deposit_reference_no: '充值凭证'
+        agent_rank: '用户等级'
+        rank: '等级数值'
+        joined_projects: '参与项目'
+        price: '单价'
+        product: '产品'
     # Examples
     # labels:
     #   defaults:
