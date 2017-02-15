@@ -34,11 +34,15 @@ class Admin::AgentRanksController < ApplicationController
   end
 
   def destroy
+    if params[:id] == 1
+      redirect_to admin_agent_ranks_path, alert: "默认用户等级不能删除" and return
+    end
+
     @agent_rank = AgentRank.find(params[:id])
     if @agent_rank.destroy
-      redirect_to admin_agent_ranks_path, alert: "分销商等级成功删除！"
+      redirect_to admin_agent_ranks_path, alert: "用户等级成功删除！"
     else
-      redirect_to admin_agent_ranks_path, alert: "分销商等级删除失败，请查看相关日志检查原因！"
+      redirect_to admin_agent_ranks_path, alert: "用户等级删除失败，请查看相关日志检查原因！"
     end
   end
 

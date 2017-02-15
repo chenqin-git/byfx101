@@ -1,0 +1,13 @@
+<div class="col-md-4 col-md-offset-4">
+  <h2>创建管理员</h2>
+  <hr>
+  <%= simple_form_for @user, url: init_install_path, method: :post do |f| %>
+    <%= f.error_notification %>
+    <div class="form-group">
+      <%= f.input :email, required: true, autofocus: true, input_html: { class: "form-control"} %>
+      <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { class: "form-control"} %>
+      <%= f.input :password_confirmation, required: true, input_html: { class: "form-control"} %>
+    </div>
+    <%= f.submit "提交", class: "btn btn-primary", data: { disable_with: "提交中..." } %>
+  <% end %>
+</div>

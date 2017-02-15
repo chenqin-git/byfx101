@@ -66,6 +66,12 @@ Rails.application.routes.draw do
 #    resources :orders, only: [:new, :create]
 #  end
 
+  resource :install, only: [:show], controller: :install do
+    collection do
+      post :init
+    end
+  end
+
   root 'projects#index'
   resource :welcome, controller: :welcome
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
