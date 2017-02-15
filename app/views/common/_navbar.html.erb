@@ -19,16 +19,18 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                          <li><%= link_to("参与项目", projects_path) %></li>
+                          <li><%= link_to("我的项目", projects_path) %></li>
                           <li><%= link_to("我的订单", account_orders_path) %></li>
                           <li><%= link_to("消费记录", account_account_books_path) %></li>
 
-                          <li class="divider"> </li>
-                          <li><%= link_to("用户管理", admin_users_path) %></li>
-                          <li><%= link_to("项目管理", admin_projects_path) %></li>
-                          <li><%= link_to("订单管理", admin_orders_path) %></li>
-                          <li><%= link_to("分销商等级管理", admin_agent_ranks_path) %></li>
-                          <li><%= link_to("价格表管理", admin_quotations_path) %></li>
+                          <% if current_user && current_user.is_admin? %>
+                            <li class="divider"> </li>
+                            <li><%= link_to("用户管理", admin_users_path) %></li>
+                            <li><%= link_to("项目管理", admin_projects_path) %></li>
+                            <li><%= link_to("订单管理", admin_orders_path) %></li>
+                            <li><%= link_to("分销商等级管理", admin_agent_ranks_path) %></li>
+                            <li><%= link_to("价格表管理", admin_quotations_path) %></li>
+                          <% end %>
 
                           <li class="divider"> </li>
                           <li> <%= link_to("登出", destroy_user_session_path, method: :delete) %> </li>

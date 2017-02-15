@@ -24,6 +24,10 @@ en:
         joined_projects: '参与项目'
         price: '单价'
         product: '产品'
+        result: '结果'
+        success_num: '成交数量'
+        message: '消息'
+        operator: '操作员'
     # Examples
     # labels:
     #   defaults:

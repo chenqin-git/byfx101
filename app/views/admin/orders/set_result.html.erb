@@ -33,7 +33,7 @@
   <%= simple_form_for @order_result, url: save_result_admin_order_path(@order), method: :post do |f| %>
     <div class="form-group">
       <%= f.input :result, input_html: { class: "form-control"} %>
-      <%= f.input :success_num, as: :integer %>
+      <%= f.input :success_num, as: :integer, hint: "注意：-1 表示未开始操作，0 表示全部失败" %>
       <%= f.input :message, input_html: { class: "form-control"} %>
       <%= f.input :operator, input_html: { class: "form-control"} %>
     </div>

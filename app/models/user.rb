@@ -16,6 +16,10 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :agent_rank, :reject_if => :all_blank
   accepts_nested_attributes_for :joined_projects, :reject_if => :any_blank
 
+  def is_admin?
+    return id == 1
+  end
+
   def is_member_of?(project)
     joined_projects.include?(project)
   end

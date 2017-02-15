@@ -30,15 +30,15 @@ class OrdersController < ApplicationController
 
     @stock_num = @product.stock_num!
     if @order.num > @stock_num
-      redirect_to project_path(@product.project), alert: "当前库存（#{@stock_num}）不足，无法购买 #{@order.num} 个，请刷新库存重试"
-      return
+      flash[:warning] = "当前库存（#{@stock_num}）不足，无法购买 #{@order.num} 个，请刷新库存重试"
+      render :new and return
     end
 
     @order_amount = @order.calculate_amount!
     @balance = current_user.balance!
     if @order_amount > @balance
-      redirect_to project_path(@product.project), alert: "你的余额（#{@balance}）不足，无法购买此商品（#{@order_amount}）"
-      return
+      flash[:warning] = "你的余额（#{@balance}）不足，无法购买此商品（#{@order_amount}）"
+      render :new and return
     end
 
     if @order.save
