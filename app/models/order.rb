@@ -1,6 +1,5 @@
 class Order < ApplicationRecord
-  validates :num, format: { with: /\d+/, message: "必须是数字" }
-
+  validates :num, presence: true
   belongs_to :product
   belongs_to :user
   has_one :order_result

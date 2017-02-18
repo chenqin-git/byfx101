@@ -1,4 +1,7 @@
 class Product < ApplicationRecord
+  validates :name, presence: true
+  validates :input_name, presence: true
+
   belongs_to :project
   has_many :orders, dependent: :restrict_with_error
   has_many :quotations, dependent: :delete_all

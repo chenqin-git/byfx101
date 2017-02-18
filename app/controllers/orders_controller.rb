@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
     end
 
     @stock_num = @product.stock_num!
-    if @order.num > @stock_num
+    if @order.num && @order.num > @stock_num
       flash[:warning] = "当前库存（#{@stock_num}）不足，无法购买 #{@order.num} 个，请刷新库存重试"
       render :new and return
     end
