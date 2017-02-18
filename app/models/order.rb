@@ -6,6 +6,12 @@ class Order < ApplicationRecord
   accepts_nested_attributes_for :order_result
 
   scope :recent, -> { order("created_at DESC") }
+  scope :query, ->(product_id, start_date, end_date) {
+    where("(product_id == ? or -1 == ?) and (created_at >= ? or '' == ?) and (created_at <= ? or '' == ?)",
+      product_id, product_id,
+      start_date, start_date,
+      end_date, end_date)
+  }
 
   def calculate_amount!
     @price = product.calculate_agent_price!(user)

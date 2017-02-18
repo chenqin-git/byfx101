@@ -3,7 +3,21 @@ class Admin::UsersController < ApplicationController
   before_action :check_permission!, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
   def index
-    @users = User.all.paginate(:page => params[:page], :per_page => 20)
+    @agent_ranks = AgentRank.all.to_a
+    @agent_ranks.insert(0, AgentRank.new(id: -1, name: "所有"))
+
+    @email = params.key?(:email) ? params[:email] : ""
+    @agent_rank_id = params.key?(:agent_rank_id) ? params[:agent_rank_id].to_i : -1
+    @start_date = params.key?(:start_date) ? params[:start_date] : ""
+    @end_date = params.key?(:end_date) ? params[:end_date] : ""
+
+    @is_search = params.key?(:search)
+
+    if @is_search
+      @users = User.all.query(@email, @agent_rank_id, @start_date, @end_date).paginate(:page => params[:page], :per_page => 20)
+    else
+      @users = User.all.paginate(:page => params[:page], :per_page => 20)
+    end
   end
 
   def new_configure

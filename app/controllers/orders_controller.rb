@@ -59,7 +59,7 @@ class OrdersController < ApplicationController
         @product.stock.save
       end
 
-      redirect_to project_path(@product.project)
+      redirect_to project_path(@product.project), notice: "购买 #{@product.name} * #{@order.num} 成功，点击我的订单查看发货结果"
     else
       render :new
     end

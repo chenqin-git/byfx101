@@ -16,6 +16,14 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :agent_rank, :reject_if => :all_blank
   accepts_nested_attributes_for :joined_projects, :reject_if => :any_blank
 
+  scope :query, ->(email, agent_rank_id, start_date, end_date) {
+    where("('' = ? or email like ?) and (-1 = ? or agent_rank_id = ?) and ('' = ? or created_at >= ?) and ('' = ? or created_at <= ?)",
+      email, "%#{email}%",
+      agent_rank_id, agent_rank_id,
+      start_date, start_date,
+      end_date, end_date)
+  }
+
   def is_admin?
     return id == 1
   end
