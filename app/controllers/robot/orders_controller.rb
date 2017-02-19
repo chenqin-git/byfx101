@@ -1,7 +1,9 @@
 class Robot::OrdersController < ApplicationController
   def queue
-    @order = Order.find_by_sql("SELECT orders.* FROM orders
+    @order = Order.find_by_sql("SELECT orders.*, products.name as product_name, users.email as user_name FROM orders
     LEFT JOIN order_results ON orders.id = order_results.order_id
+    LEFT JOIN products ON products.id = orders.product_id
+    LEFT JOIN users ON users.id = orders.user_id
     where orders.state = 0 and (order_results.success_num = -1 or order_results.success_num is null)
     ORDER BY orders.id ASC
     limit 1")
